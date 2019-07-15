@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+
+  rabbitmq:
+    image: rabbitmq:3
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
+      - RABBITMQ_DEFAULT_VHOST=my_vhost
+    ports:
+      - "8088:15672"
+    command: sh -c "echo '[{rabbit, [{loopback_users, []}]}].' >> /etc/rabbitmq/rabbitmq.config && 
+                    rabbitmq-plugins enable rabbitmq_management && 
+                    rabbitmq-server" 
+
