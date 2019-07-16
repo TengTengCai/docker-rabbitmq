@@ -9,6 +9,7 @@ services:
       - RABBITMQ_DEFAULT_VHOST=my_vhost
     ports:
       - "8088:15672"
+      - "5672:5672"
     command: sh -c "echo '[{rabbit, [{loopback_users, []}]}].' >> /etc/rabbitmq/rabbitmq.config && 
                     rabbitmq-plugins enable rabbitmq_management && 
                     rabbitmq-server" 
