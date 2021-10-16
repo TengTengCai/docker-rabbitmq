@@ -1,17 +1,19 @@
 version: "3.7"
 services:
   rabbitmq:
-    # image: rabbitmq:3-management
-    build: .
+    image: rabbitmq:3-management-alpine
     container_name: rabbitmq
     volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
       - ./data/etc/:/etc/rabbitmq/
       - ./data/data/:/var/lib/rabbitmq/
       - ./data/logs/:/var/log/rabbitmq/
     environment:
+      - RABBITMQ_PLUGINS=rabbitmq_federation_management,rabbitmq_management,rabbitmq_mqtt,rabbitmq_stomp
       - RABBITMQ_DEFAULT_USER=root
       - RABBITMQ_DEFAULT_PASS=root
       - RABBITMQ_DEFAULT_VHOST=my_vhost
     ports:
       - "15672:15672"
       - "5672:5672"
+
